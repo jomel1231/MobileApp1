@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { auth } from "../FirebaseConfig";
 import { useNavigation } from "@react-navigation/core";
-import { MaterialIcons } from "@expo/vector-icons"; // For icons
+import { MaterialIcons } from "@expo/vector-icons";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -31,38 +31,31 @@ const HomeScreen = () => {
 
   return (
     <ImageBackground
-      source={require("../assets/page 5.jpg")} // Replace with your background image
+      source={require("../assets/BG.jpg")} // Replace with your background image
       style={styles.background}
     >
       <ScrollView contentContainerStyle={styles.container}>
-        {/* Arrow Back Button */}
-        <TouchableOpacity
-          style={styles.arrowButton}
-          onPress={() => navigation.replace("Welcome")}
-        >
-          <MaterialIcons name="arrow-back" size={24} color="white" />
-        </TouchableOpacity>
-
-        {/* Title */}
+        {/* Header Section */}
         <Text style={styles.title}>Home</Text>
 
         {/* Achievements Section */}
-        <View style={styles.achievements}>
+        <View style={styles.achievementsSection}>
           <Text style={styles.sectionTitle}>Achievements</Text>
           <View style={styles.achievementCard}>
-            {/* Replace these shapes with dynamic data or real images as needed */}
+            {/* Replace shapes with actual content as needed */}
             <View style={styles.shapeTriangle} />
             <View style={styles.shapeSquare} />
             <View style={styles.shapeCircle}>
               <Text style={styles.shapeText}>1st</Text>
             </View>
+            <View style={styles.shapeBar} />
           </View>
         </View>
 
         {/* Notifications Section */}
-        <View style={styles.notifications}>
+        <View style={styles.notificationsSection}>
           <Text style={styles.sectionTitle}>Notifications</Text>
-          {Array.from({ length: 3 }).map((_, index) => (
+          {[...Array(3)].map((_, index) => (
             <View key={index} style={styles.notificationCard}>
               <MaterialIcons name="notifications" size={24} color="gray" />
               <View style={styles.notificationTextContainer}>
@@ -81,10 +74,10 @@ const HomeScreen = () => {
           <TouchableOpacity>
             <MaterialIcons name="home" size={28} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <MaterialIcons name="person" size={28} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Modules")}>
             <MaterialIcons name="menu-book" size={28} color="white" />
           </TouchableOpacity>
           <TouchableOpacity>
@@ -105,39 +98,29 @@ const styles = StyleSheet.create({
   },
   container: {
     flexGrow: 1,
-    justifyContent: "space-between",
-  },
-  arrowButton: {
-    position: "absolute",
-    top: 50, // Position near the top
-    left: 20, // Align to the left
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Add background for better visibility
-    padding: 10,
-    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingTop: 50,
   },
   title: {
-    marginTop: 80, // Adjust to align below the arrow button
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
+    marginBottom: 20,
   },
-  achievements: {
-    marginTop: 20,
-    alignItems: "center",
+  achievementsSection: {
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     color: "white",
     marginBottom: 10,
   },
   achievementCard: {
-    width: "90%",
-    height: 150,
     backgroundColor: "white",
-    borderRadius: 15,
-    justifyContent: "center",
+    borderRadius: 10,
+    padding: 20,
     alignItems: "center",
   },
   shapeTriangle: {
@@ -169,17 +152,21 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
-  notifications: {
-    marginTop: 20,
-    alignItems: "center",
+  shapeBar: {
+    width: 10,
+    height: 50,
+    backgroundColor: "gray",
+    marginTop: 10,
+  },
+  notificationsSection: {
+    marginBottom: 20,
   },
   notificationCard: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "white",
-    padding: 10,
+    padding: 15,
     borderRadius: 10,
-    width: "90%",
     marginBottom: 10,
   },
   notificationTextContainer: {
