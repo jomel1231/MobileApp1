@@ -15,7 +15,6 @@ const ModuleScreen = () => {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState("");
 
-  // Example modules data
   const modules = [
     { id: "1", title: "Introduction to Mobile Phone Repair" },
     { id: "2", title: "Safety and Handling Precautions" },
@@ -23,7 +22,6 @@ const ModuleScreen = () => {
     { id: "4", title: "Identifying Mobile Phone Components" },
   ];
 
-  // Filter modules based on search text
   const filteredModules = modules.filter((module) =>
     module.title.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -34,18 +32,13 @@ const ModuleScreen = () => {
       style={styles.background}
     >
       <View style={styles.container}>
-        {/* Back Arrow */}
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
           <MaterialIcons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-
-        {/* Title */}
         <Text style={styles.title}>Modules</Text>
-
-        {/* Search Bar */}
         <View style={styles.searchContainer}>
           <MaterialIcons name="search" size={24} color="gray" />
           <TextInput
@@ -56,8 +49,6 @@ const ModuleScreen = () => {
             onChangeText={setSearchText}
           />
         </View>
-
-        {/* Modules List */}
         <FlatList
           data={filteredModules}
           keyExtractor={(item) => item.id}
